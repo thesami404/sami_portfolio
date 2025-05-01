@@ -1,2 +1,2 @@
-# sami_portfolio
+# Sami
 My personal portfolio website
