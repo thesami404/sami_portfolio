@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday!</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+
+        .card {
+            position: relative;
+            width: 350px;
+            height: 550px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            overflow: visible;
+            text-align: center;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .balloon-container {
+            position: relative;
+            width: 300px;
+            height: 350px;
+            margin-top: -50px;
+        }
+
+        .balloon {
+            position: absolute;
+            width: 100%;
+            height: 300px;
+            background: #ff4081;
+            border-radius: 50%;
+            top: 0;
+            left: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: inset -10px -10px 30px rgba(0, 0, 0, 0.2);
+            animation: float 3s ease-in-out infinite;
+            z-index: 2;
+            overflow: hidden;
+        }
+
+        .balloon:before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 50px;
+            background: #ff4081;
+            bottom: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 0 0 10px 10px;
+            z-index: 1;
+        }
+
+        .balloon-image {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 3;
+            transition: transform 0.3s;
+        }
+
+        .balloon-image:hover {
+            transform: scale(1.05);
+        }
+
+        .message {
+            margin-top: 20px;
+            padding: 20px;
+            position: relative;
+            z-index: 5;
+            width: 100%;
+        }
+
+        h1 {
+            color: #ff4081;
+            margin-bottom: 10px;
+            font-size: 24px;
+        }
+
+        .wish-text {
+            color: #555;
+            line-height: 1.4;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        .btn {
+            margin-top: 20px;
+            padding: 12px 30px;
+            background: linear-gradient(to right, #ff4081, #ff6b9e);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(255, 64, 129, 0.4);
+            position: relative;
+            z-index: 10;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 64, 129, 0.6);
+        }
+
+        .confetti {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: #f00;
+            border-radius: 50%;
+            animation: fall 5s linear forwards;
+            z-index: 1;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .cake-container {
+            margin-top: 15px;
+            position: relative;
+            height: 80px;
+        }
+
+        .cake {
+            font-size: 50px;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 0.5s infinite alternate;
+        }
+
+        .candles {
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .candle {
+            display: inline-block;
+            font-size: 20px;
+            animation: flicker 0.5s infinite alternate;
+            margin: 0 3px;
+        }
+
+        @keyframes bounce {
+            from {
+                transform: translateY(0) translateX(-50%);
+            }
+            to {
+                transform: translateY(-15px) translateX(-50%);
+            }
+        }
+
+        @keyframes flicker {
+            0%, 100% {
+                opacity: 1;
+                text-shadow: 0 0 5px #ff9e00;
+            }
+            50% {
+                opacity: 0.8;
+                text-shadow: 0 0 10px #ff6600, 0 0 20px #ff6600;
+            }
+        }
+
+        .balloon-string {
+            position: absolute;
+            width: 2px;
+            height: 100px;
+            background: #ccc;
+            bottom: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+        }
+
+        .floating-hearts {
+            position: absolute;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            animation: float-heart 6s linear forwards;
+            opacity: 0.8;
+        }
+
+        @keyframes float-heart {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .balloon-text {
+            position: absolute;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+            text-align: center;
+            width: 100%;
+            z-index: 4;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="balloon-container">
+            <div class="balloon">
+                <img src="1677328444464.jpg" alt="Birthday Girl" class="balloon-image">
+            </div>
+            <div class="balloon-string"></div>
+        </div>
+        
+        <div class="message">
+            <h1>Happy Birthday!</h1>
+            <p class="wish-text">Life feels brighter with you!</p>
+            <p class="wish-text">Happy Birthday to my free-spirited friend!</p>
+            
+            <div class="cake-container hidden" id="cakeContainer">
+                <div class="cake">🎂</div>
+                <div class="candles">
+                    <span class="candle">🕯️</span>
+                    <span class="candle">🕯️</span>
+                    <span class="candle">🕯️</span>
+                </div>
+            </div>
+            
+            <button class="btn" onclick="celebrate()">Click for Surprise!</button>
+            <p class="wish-text">"With love, Sami"</p>
+        </div>
+    </div>
+
+    <div class="floating-hearts" id="hearts-left"></div>
+    <div class="floating-hearts" id="hearts-right"></div>
+
+    <audio id="birthdayAudio" src="https://www.soundjay.com/human/sounds/happy-birthday-song-01.mp3" preload="auto"></audio>
+    <audio id="romanticAudio" src="Happy Birthday message  birthday sms শুভ জন্মদিনের শুভেচ্ছা এসএমএস। শুভ জন্মদিন  i love u  i miss u.mp4" preload="auto"></audio>
+    <audio id="halAudio" src="https://www.soundjay.com/misc/sounds/magic-chime-01.mp3" preload="auto"></audio>
+
+    <script>
+        let heartInterval;
+        const heartDuration = 30000; // 30 seconds
+        let romanticAudioPlayed = false;
+
+        function celebrate() {
+            // Show cake with candles
+            const cakeContainer = document.getElementById('cakeContainer');
+            cakeContainer.classList.remove('hidden');
+            
+            // Create confetti
+            for (let i = 0; i < 100; i++) {
+                createConfetti();
+            }
+            
+            // Clear previous heart interval if exists
+            if (heartInterval) {
+                clearInterval(heartInterval);
+            }
+            
+            // Start continuous heart rain for 30 seconds from both sides
+            const startTime = Date.now();
+            heartInterval = setInterval(() => {
+                createHeart('left');
+                createHeart('right');
+                if (Date.now() - startTime >= heartDuration) {
+                    clearInterval(heartInterval);
+                }
+            }, 150); // Create hearts every 150ms
+            
+            // Play sounds
+            playBirthdaySound();
+            playHalSound();
+            
+            // Play romantic music after birthday song ends
+            setTimeout(() => {
+                playRomanticSound();
+            }, 6000); // After birthday song duration
+            
+            // Change button text temporarily
+            const btn = document.querySelector('.btn');
+            btn.textContent = "Wow! Amazing!";
+            btn.style.background = "linear-gradient(to right, #4caf50, #8bc34a)";
+            
+            setTimeout(() => {
+                btn.textContent = "Click Again!";
+                btn.style.background = "linear-gradient(to right, #ff4081, #ff6b9e)";
+            }, 3000);
+        }
+
+        function createConfetti() {
+            const colors = ['#ff4081', '#00bcd4', '#ffeb3b', '#4caf50', '#e91e63'];
+            const confetti = document.createElement('div');
+            confetti.className = 'confetti';
+            confetti.style.left = Math.random() * 100 + 'vw';
+            confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+            confetti.style.animationDuration = (Math.random() * 5 + 3) + 's';
+            confetti.style.width = (Math.random() * 10 + 8) + 'px';
+            confetti.style.height = confetti.style.width;
+            document.body.appendChild(confetti);
+            
+            setTimeout(() => {
+                confetti.remove();
+            }, 8000);
+        }
+
+        function createHeart(side) {
+            const heartsContainer = document.getElementById(`hearts-${side}`);
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = '❤️';
+            
+            if (side === 'left') {
+                heart.style.left = (Math.random() * 30) + 'vw';
+            } else {
+                heart.style.left = (Math.random() * 30 + 70) + 'vw';
+            }
+            
+            heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+            heart.style.animationDuration = (Math.random() * 4 + 3) + 's';
+            heartsContainer.appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 6000);
+        }
+
+        function playBirthdaySound() {
+            const audio = document.getElementById('birthdayAudio');
+            audio.currentTime = 0;
+            audio.play().catch(e => console.log("Audio play failed:", e));
+            romanticAudioPlayed = false;
+        }
+
+        function playRomanticSound() {
+            if (!romanticAudioPlayed) {
+                const audio = document.getElementById('romanticAudio');
+                audio.currentTime = 0;
+                audio.loop = true;
+                audio.play().catch(e => console.log("Audio play failed:", e));
+                romanticAudioPlayed = true;
+            }
+        }
+
+        function playHalSound() {
+            const audio = document.getElementById('halAudio');
+            audio.currentTime = 0;
+            audio.play().catch(e => console.log("Audio play failed:", e));
+        }
+
+        // Create more floating balloons in background with text
+        for (let i = 0; i < 20; i++) {
+            setTimeout(() => {
+                createFloatingBalloon();
+            }, i * 800);
+        }
+
+        function createFloatingBalloon() {
+            const colors = ['#ff4081', '#00bcd4', '#ffeb3b', '#4caf50', '#e91e63'];
+            const balloon = document.createElement('div');
+            balloon.style.position = 'absolute';
+            balloon.style.width = (Math.random() * 60 + 40) + 'px';
+            balloon.style.height = (Math.random() * 80 + 60) + 'px';
+            balloon.style.background = colors[Math.floor(Math.random() * colors.length)];
+            balloon.style.borderRadius = '50%';
+            balloon.style.left = Math.random() * 100 + 'vw';
+            balloon.style.top = '100vh';
+            balloon.style.boxShadow = 'inset -5px -5px 15px rgba(0,0,0,0.2)';
+            balloon.style.zIndex = '1';
+            balloon.style.display = 'flex';
+            balloon.style.justifyContent = 'center';
+            balloon.style.alignItems = 'center';
+            balloon.style.color = 'white';
+            balloon.style.fontWeight = 'bold';
+            balloon.style.fontSize = '12px';
+            balloon.style.textShadow = '1px 1px 3px rgba(0,0,0,0.5)';
+            balloon.textContent = 'Happy Birthday';
+            document.body.appendChild(balloon);
+            
+            const animationDuration = Math.random() * 15 + 15;
+            
+            balloon.animate([
+                { top: '100vh', opacity: 1 },
+                { top: '-100px', opacity: 0 }
+            ], {
+                duration: animationDuration * 1000,
+                easing: 'linear'
+            });
+            
+            setTimeout(() => {
+                balloon.remove();
+            }, animationDuration * 1000);
+        }
+    </script>
+</body>
+</html>
